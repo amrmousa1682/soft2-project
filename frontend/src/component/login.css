@@ -1,0 +1,22 @@
+section{
+ background-color: #9A616D;
+ height: 100% important!
+}
+.card{
+    border-radius: 1rem;
+}
+.img-fluid{
+    border-radius: 1rem 0 0 1rem;
+}
+i{
+    color: #ff6219;
+}
+h5{
+    letter-spacing: 1px;
+}
+p{
+    color: #393f81; 
+}
+p a:first-of-type{
+    color: #393f81;
+}
