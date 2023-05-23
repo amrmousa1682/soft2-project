@@ -1,0 +1,27 @@
+nav{
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 0%;
+    /* background: rgb(255, 255, 255); */
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 8px;
+}
+nav a{
+    color: rgb(168, 45, 73) !important;
+    padding: 40px 12px 35px;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 600;
+    text-decoration-line: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+nav .logo{
+  max-width: 40%;
+   
+}
+
+#basic-navbar-nav{
+    margin-left: 31% ;
+   
+}

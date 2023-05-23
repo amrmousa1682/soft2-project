@@ -1,0 +1,46 @@
+.slid{
+    background-color: #ffffff;
+    border:1px solid #b8b8b8;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    text-align: center;
+    padding: 50px 0px;
+    margin: 50px 0pxx;
+    overflow: hidden;
+}
+.slid img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 30px 0px;
+    margin-bottom: 200px;
+}
+.slid .carousel-caption p{
+   color: #333;
+   font-size: 17px;
+   line-height: 25px;
+   font-family: 'Dosis', sans-serif;
+   font-family: 'Quicksand', sans-serif;
+}
+.slid .carousel-caption span{
+    color: #ffffff;
+    display: block;
+    margin-top: 10px ;
+   
+}
+.slid .carousel{
+    background-color: #9A616D;
+    margin: 70px 30px;
+    border-radius: 15px;
+    max-width: 100%;
+    overflow: hidden;
+}
+.slid .carousel-indicators button{
+border:1px solid #fff;
+}
+.slid h2{
+    color: #9A616D;
+    margin: 20px 0px;
+    font-family:'Quicksand', sans-serif ;
+}
