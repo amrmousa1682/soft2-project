@@ -1,6 +1,5 @@
 const express = require("express");
-const multer = require("multer");
-const { body } = require("express-validator");
+const { body,param } = require("express-validator");
 
 const validateRequest = require("../middleware/validate-request");
 
@@ -178,6 +177,23 @@ router.patch(
   ],
   validateRequest,
   adminController.addDoctorToClass
+);
+
+router.get(
+  "/enrollments/:subjectCode",
+  [
+    param("subjectCode")
+      .trim()
+      .custom((code, { req }) => {
+        return Subject.findOne({ where: { code: code } }).then((subject) => {
+          if (!subject) return Promise.reject();
+          req.params.subjectId = subject.id;
+          return Promise.resolve();
+        });
+      })
+      .withMessage("Subject code is not found"),
+  ],
+  adminController.getStudentsEnrolledInSubject
 );
 
 module.exports = router;

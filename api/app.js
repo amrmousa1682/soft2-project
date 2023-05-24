@@ -52,6 +52,7 @@ Subject.belongsTo(Department, { constraints: true, onDelete: "CASCADE" });
 Subject.belongsTo(Subject, { as: "prerequisite" });
 Subject.belongsTo(User, { as: "doctor" });
 User.belongsToMany(Subject, { through: Enrollment });
+Enrollment.belongsTo(User);
 Department.hasMany(Subject);
 
 sequelize
