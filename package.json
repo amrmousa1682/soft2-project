@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "backend:run": "cd ./api/ && docker-compose up --build",
+    "frontend:install": "cd ./frontend/ && npm install",
+    "frontend:run": "cd ./frontend/ && npm start"
+  }
+}
