@@ -25,62 +25,28 @@ exports.getSubjects = (req, res, next) => {
     });
 };
 
-exports.enrollInSubject = async (req, res, next) => {
+exports.enrollInSubject = (req, res, next) => {
   const [subjectId, userId] = [req.params.subjectId, req.body.userId];
-  const subject = await Subject.findOne({ where: { id: subjectId } });
-  if (subject.prerequisiteId) {
-    const pre = await Enrollment.findOne({
-      where: { userId: userId, subjectId: subject.prerequisiteId },
-    });
-    if (!pre) {
-      const err = new Error("You have to enroll in prerequisite first.");
+  Enrollment.findOne({
+    where: { userId: userId, subjectId: subjectId },
+  })
+    .then((result) => {
+      if (!result)
+        return Enrollment.create({ userId: userId, subjectId: subjectId });
+      const err = new Error("You already enrolled in this subject.");
       err.statusCode = 400;
       next(err);
       return;
-    } else {
-      const enrolled = await Enrollment.findOne({
-        where: { userId: userId, subjectId: subjectId },
-      });
-      if (enrolled) {
-        const err = new Error("You already enrolled in this subject.");
-        err.statusCode = 400;
-        next(err);
-        return;
-      } else {
-        Enrollment.create({ userId: userId, subjectId: subjectId })
-          .then(() => {
-            res.status(201).json({
-              message: "You have been enrolled in subject successfully.",
-            });
-          })
-          .catch((err) => {
-            err.statusCode = 500;
-            next(err);
-          });
-      }
-    }
-  } else {
-     const enrolled = await Enrollment.findOne({
-       where: { userId: userId, subjectId: subjectId },
-     });
-     if (enrolled) {
-       const err = new Error("You already enrolled in this subject.");
-       err.statusCode = 400;
-       next(err);
-       return;
-     } else {
-       Enrollment.create({ userId: userId, subjectId: subjectId })
-         .then(() => {
-           res.status(201).json({
-             message: "You have been enrolled in subject successfully.",
-           });
-         })
-         .catch((err) => {
-           err.statusCode = 500;
-           next(err);
-         });
-     }
-  }
+    })
+    .then(() => {
+      res
+        .status(201)
+        .json({ message: "You have been enrolled in subject successfully." });
+    })
+    .catch((err) => {
+      err.statusCode = 500;
+      next(err);
+    });
 };
 
 exports.getClass = (req, res, next) => {
