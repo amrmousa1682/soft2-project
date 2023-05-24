@@ -48,7 +48,8 @@ const Main = () => {
         alert(err.response.data.message);
       });
   };
-  let content,login=false;
+  let content,
+    login = false;
   if (role === "admin") {
     content = <Admin />;
   } else if (role === "doctor") {
@@ -56,20 +57,15 @@ const Main = () => {
   } else if (role === "student") {
     content = <Student />;
   } else {
-    login=true;
-    content = (
-      <>
-        <Login onLogin={loginHandler} />
-        <Footer />
-      </>
-    );
+    login = true;
+    content = <Login onLogin={loginHandler} />;
   }
   return (
     <>
-      <Navs login={login}/>
+      <Navs login={login} />
       {content}
       <Footer />
-      <EndFooter/>
+      <EndFooter />
     </>
   );
 };

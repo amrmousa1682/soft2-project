@@ -19,6 +19,7 @@ const Admin = () => {
   const academicNumber = useRef();
   const doctorEmail = useRef();
   const subjectCodeClass = useRef();
+  const subjectCodeStudents = useRef();
   const addDepartmentHandler = () => {
     axios
       .post(
@@ -149,6 +150,34 @@ const Admin = () => {
         } else alert(err.response.data.message);
       });
   };
+  const getStudents = () => {
+    axios
+      .get(
+        `http://localhost:5000/admin/enrollments/${subjectCodeStudents.current.value}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("Authorization"),
+          },
+          responseType: "blob",
+        }
+      )
+      .then((res) => {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        console.log(res.data);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "students.xlsx");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          alert(err.response.data.message);
+          localStorage.removeItem("Authorization");
+          window.location.reload(false);
+        } else alert(err.response.data.message);
+      });
+  };
   return (
     <div>
       <div className="adminPage">
@@ -263,6 +292,24 @@ const Admin = () => {
           </div>
         </div>
       </div>
+      <div className="account">
+          <div className="container">
+            <h4> get students in subject </h4>
+            <div className="row">
+              <div className=" btn cardd  col-md-6 ">
+                <button onClick={getStudents}>
+                  get students
+                </button>
+                <br />
+              </div>
+              <div className=" cardd col-md-6">
+                <label> Subject Code : </label>
+                <input type="text" ref={subjectCodeStudents} />
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
       <div className="br"></div>
     </div>
   );
