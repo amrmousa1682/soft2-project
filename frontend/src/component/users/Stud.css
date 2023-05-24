@@ -1,0 +1,18 @@
+.studPage h2{
+    margin: 10% 0%;
+    text-align: center;
+    color: #9A616D;
+}
+.card{
+    padding: 10px;
+    margin-bottom: 5%;
+}
+.card button{
+    background-color: white;
+    color: #9A616D;
+    border: solid 1px #9A616D;
+}
+.card button:hover{
+    background-color: #9A616D;
+    color: white;
+}
